@@ -28,8 +28,8 @@ Hono/Inngest service, now native Remix modules under `app/lib/agent/`).
 
 ## Env vars (see .env.example)
 
-`DATABASE_URL` (Render Postgres internal URL), `UPSTASH_REDIS_REST_URL/TOKEN`,
-`UPSTASH_BOX_API_KEY`, `GEMINI_API_KEY` (or `GEMINI_API_KEYS`),
-optional `MODEL_*`, `CONTROLLER_SERVER_ID`, guardrail `AGENT_*`.
+`DATABASE_URL` (Render Postgres internal URL), `BETTER_AUTH_SECRET`,
+`BETTER_AUTH_URL`, `UPSTASH_REDIS_REST_URL/TOKEN`, `UPSTASH_BOX_API_KEY`,
+`GEMINI_API_KEY` (or `GEMINI_API_KEYS`), optional `MODEL_*`.
 
-Deploy: `render.yaml` (Render web service, `npm install` / `npm start`).
+Deploy: `render.yaml` (Render web service, `npm ci` / `npm start`, Node 24).

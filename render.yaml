@@ -3,17 +3,18 @@ services:
     name: controller
     runtime: node
     plan: starter
-    buildCommand: npm install
+    buildCommand: npm ci
     startCommand: npm start
     healthCheckPath: /
     envVars:
+      - key: NODE_VERSION
+        value: "24"
       - key: NODE_ENV
         value: production
-      - key: PORT
-        value: 44100
-      # Set these in the Render dashboard (or via env groups):
-      # BETTER_AUTH_SECRET, BETTER_AUTH_URL (public URL of this service)
+      # BETTER_AUTH_SECRET — random string (`openssl rand -base64 32`)
+      # BETTER_AUTH_URL — public URL, e.g. https://controller.onrender.com
       # DATABASE_URL — Render Postgres INTERNAL connection string
-      # UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN, UPSTASH_BOX_API_KEY,
-      # GEMINI_API_KEY (or GEMINI_API_KEYS),
-      # optional MODEL_STRONG / MODEL_LITE / MODEL_SUPPORT / CONTROLLER_SERVER_ID
+      # UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN — Upstash Redis REST API
+      # UPSTASH_BOX_API_KEY — Upstash Box API key
+      # GEMINI_API_KEY (or GEMINI_API_KEYS for rotation)
+      # optional MODEL_STRONG / MODEL_LITE / MODEL_SUPPORT

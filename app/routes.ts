@@ -1,0 +1,27 @@
+import { get, post, route } from "remix/routes"
+
+export const routes = route({
+  assets: get("/assets/*path"),
+  home: "/",
+  privacy: "/privacy",
+  terms: "/terms",
+  loginView: get("/login"),
+  loginSubmit: post("/login"),
+  signupView: get("/signup"),
+  signupSubmit: post("/signup"),
+  planView: get("/plan"),
+  planSubmit: post("/plan"),
+  logout: post("/logout"),
+  dashboard: "/dashboard",
+  docs: "/docs",
+  goalStatus: get("/goals/:id/status"),
+  goalConfirm: post("/goals/:id/confirm"),
+  goalCancel: post("/goals/:id/cancel"),
+  goalShow: get("/goals/:id"),
+  goalSubmit: post("/goals"),
+  supportThread: get("/support/thread"),
+  supportChat: post("/support/chat"),
+  statusCard: get("/status/card"),
+  statusDot: get("/status/dot"),
+  notFound: get("/*path"),
+})

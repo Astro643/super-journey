@@ -1,0 +1,28 @@
+{
+  "name": "controller-remix",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "NODE_ENV=development node --watch --import remix/node-tsx server.ts",
+    "start": "NODE_ENV=production node --import remix/node-tsx server.ts",
+    "build": "tsc --noEmit",
+    "typecheck": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=24.3.0"
+  },
+  "dependencies": {
+    "@google/genai": "^3.6.1",
+    "@upstash/box": "^0.8.1",
+    "@upstash/redis": "^1.41.1",
+    "better-auth": "^1.7.27",
+    "pg": "^8.23.1",
+    "postgres": "^4.1.1",
+    "remix": "^3.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/pg": "^8.23.1",
+    "typescript": "^5.8.3"
+  }
+}

@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: controller
+    runtime: node
+    plan: starter
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 44100
+      # Set these in the Render dashboard (or via env groups):
+      # BETTER_AUTH_SECRET, BETTER_AUTH_URL (public URL of this service)
+      # DATABASE_URL — Render Postgres INTERNAL connection string
+      # UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN, UPSTASH_BOX_API_KEY,
+      # GEMINI_API_KEY (or GEMINI_API_KEYS),
+      # optional MODEL_STRONG / MODEL_LITE / MODEL_SUPPORT / CONTROLLER_SERVER_ID

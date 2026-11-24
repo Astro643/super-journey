@@ -55,6 +55,14 @@ export async function initDb() {
     )
   `
   await sql`
+    CREATE TABLE IF NOT EXISTS goal_kv (
+      key text PRIMARY KEY,
+      value jsonb NOT NULL,
+      expires_at timestamptz,
+      updated_at timestamptz NOT NULL DEFAULT now()
+    )
+  `
+  await sql`
     CREATE TABLE IF NOT EXISTS "verification" (
       id text PRIMARY KEY,
       identifier text NOT NULL,

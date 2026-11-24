@@ -1,7 +1,7 @@
 import type { Handle } from "remix/component"
 
 import { sql } from "../lib/agent/db.ts"
-import { redis } from "../lib/agent/redis.ts"
+import { ping } from "../lib/agent/store.ts"
 
 export interface StatusInfo {
   overall: string
@@ -19,14 +19,14 @@ export async function loadStatus(): Promise<StatusInfo> {
       return "outage"
     }
   }
-  const [queue, db] = await Promise.all([check(redis.ping()), check(sql`SELECT 1`)])
-  const overall = queue === "operational" && db === "operational" ? "operational" : "outage"
+  const [store, db] = await Promise.all([check(ping()), check(sql`SELECT 1`)])
+  const overall = store === "operational" && db === "operational" ? "operational" : "outage"
   return {
     overall,
     label: overall === "operational" ? "All systems operational" : "Partial outage",
     updated: new Date().toISOString(),
     components: [
-      { name: "Agent queue", detail: "", status: queue },
+      { name: "Agent store", detail: "", status: store },
       { name: "Database", detail: "", status: db },
     ],
   }

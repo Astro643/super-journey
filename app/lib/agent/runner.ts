@@ -1,5 +1,5 @@
 import { understand, type Plan } from "./understand.ts"
-import { setResult } from "./redis.ts"
+import { setResult } from "./store.ts"
 import { getGoalStatus, listResumableGoals, setGoalPlan, setGoalStatus } from "./db.ts"
 import { deleteGoalBox, executeSteps } from "./box.ts"
 

@@ -20,7 +20,7 @@ import { GoalCard, loadGoalCard } from "./goal-card.tsx"
 import { loadStatus, StatusCard, StatusDot } from "./status-card.tsx"
 import { SupportThread, type ThreadMessage } from "./support-thread.tsx"
 import { cancelGoal, confirmGoal, getGoal, recordGoal, sql } from "../lib/agent/db.ts"
-import { setResult } from "../lib/agent/redis.ts"
+import { setResult } from "../lib/agent/store.ts"
 import { resolveGoalControl, startGoal } from "../lib/agent/runner.ts"
 import { answerSupport, type ChatTurn } from "../lib/agent/support.ts"
 

@@ -14,7 +14,6 @@ services:
       # BETTER_AUTH_SECRET — random string (`openssl rand -base64 32`)
       # BETTER_AUTH_URL — public URL, e.g. https://controller.onrender.com
       # DATABASE_URL — Render Postgres INTERNAL connection string
-      # UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN — Upstash Redis REST API
       # UPSTASH_BOX_API_KEY — Upstash Box API key
       # GEMINI_API_KEY (or GEMINI_API_KEYS for rotation)
       # optional MODEL_STRONG / MODEL_LITE / MODEL_SUPPORT

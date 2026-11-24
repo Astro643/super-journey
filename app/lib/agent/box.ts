@@ -1,6 +1,6 @@
 import { Box } from "@upstash/box"
 
-import { getProgress, pushProgress, redis } from "./redis.ts"
+import { getProgress, kvDel, kvGet, kvSet, pushProgress } from "./store.ts"
 import type { PlannedStep } from "./understand.ts"
 
 const STEP_TIMEOUT_MS = 120_000
@@ -32,7 +32,7 @@ const isStepResult = (p: unknown): p is StepResult =>
 // The box id is stored in Redis so a restarted process can re-attach
 // and resume remaining steps instead of starting over.
 async function getOrCreateBox(goalId: string): Promise<Box> {
-  const existing = await redis.get<string>(BOX_KEY(goalId))
+  const existing = await kvGet<string>(BOX_KEY(goalId))
   if (existing) {
     const box = await Box.get(existing)
     await box.resume().catch(() => {})
@@ -45,14 +45,14 @@ async function getOrCreateBox(goalId: string): Promise<Box> {
     browser: true,
     size: "small",
   })
-  await redis.set(BOX_KEY(goalId), box.id)
+  await kvSet(BOX_KEY(goalId), box.id)
   return box
 }
 
 export async function deleteGoalBox(goalId: string) {
-  const id = await redis.get<string>(BOX_KEY(goalId))
+  const id = await kvGet<string>(BOX_KEY(goalId))
   if (!id) return
-  await redis.del(BOX_KEY(goalId)).catch(() => {})
+  await kvDel(BOX_KEY(goalId)).catch(() => {})
   await Box.delete({ boxIds: id }).catch((error) => {
     if (!warned) {
       warned = true

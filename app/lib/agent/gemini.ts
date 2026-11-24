@@ -1,5 +1,5 @@
 import { GoogleGenAI, type GenerateContentConfig } from "@google/genai"
-import { redis } from "./redis.ts"
+import { kvExists, kvSet } from "./store.ts"
 
 const KEYS = [
   ...(process.env.GEMINI_API_KEYS ?? process.env.GEMINI_API_KEY ?? "").split(","),
@@ -27,7 +27,7 @@ async function call(model: string, prompt: string, config: GenerateContentConfig
   let last: unknown
   for (let n = 0; n < clients.length; n++) {
     const i = (cursor + n) % clients.length
-    if (await redis.exists(exhausted(i))) continue
+    if (await kvExists(exhausted(i))) continue
     cursor = (i + 1) % clients.length
     try {
       const res = await clients[i].models.generateContent({ model, contents: prompt, config })
@@ -47,7 +47,7 @@ async function call(model: string, prompt: string, config: GenerateContentConfig
       const ttl = daily
         ? Math.max(60, Math.floor((reset - Date.now()) / 1000))
         : Math.min(300, Math.max(60, retry))
-      await redis.set(exhausted(i), "1", { ex: ttl })
+      await kvSet(exhausted(i), "1", { ex: ttl })
     }
   }
   throw last ?? new Error("no GEMINI_API_KEYS configured")

@@ -14,7 +14,6 @@
   "dependencies": {
     "@google/genai": "^3.6.1",
     "@upstash/box": "^0.8.1",
-    "@upstash/redis": "^1.41.1",
     "better-auth": "^1.7.27",
     "pg": "^8.23.1",
     "postgres": "^4.1.1",

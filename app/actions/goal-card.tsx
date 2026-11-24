@@ -1,7 +1,7 @@
 import type { Handle } from "remix/component"
 
 import { getGoal, getGoalStatus } from "../lib/agent/db.ts"
-import { getProgress, getResult } from "../lib/agent/redis.ts"
+import { getProgress, getResult } from "../lib/agent/store.ts"
 import type { Plan, PlannedStep } from "../lib/agent/understand.ts"
 
 export type GoalViewStatus =

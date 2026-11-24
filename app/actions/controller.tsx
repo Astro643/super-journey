@@ -299,6 +299,7 @@ export default createController(routes, {
         const plan = (result.response.user as { plan?: string }).plan
         return authRedirect(plan ? "/dashboard" : "/plan", result.headers)
       } catch (error) {
+        console.error("[auth] login failed:", error)
         return context.render(
           <Document meta={loginMeta}>
             <LoginPage error={authError(error, "Invalid email or password.")} />
@@ -331,6 +332,7 @@ export default createController(routes, {
         })
         return authRedirect("/plan")
       } catch (error) {
+        console.error("[auth] signup failed:", error)
         return context.render(
           <Document meta={signupMeta}>
             <SignupPage error={authError(error, "Could not create that account.")} />
